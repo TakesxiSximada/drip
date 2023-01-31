@@ -4,10 +4,6 @@ on:
   push:
     branches: [ "master" ]
 
-concurrency:
-  cancel-in-progress: true
-    
-
 jobs:
   foo:
     runs-on: ubuntu-22.04
