@@ -1,3 +1,17 @@
+name: foo
+
+on:
+  push:
+    branches: ["master"]
+    
+
+concurrency:
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   foo:
     runs-on: ubuntu-22.04
