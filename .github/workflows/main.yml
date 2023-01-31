@@ -16,5 +16,7 @@ jobs:
           character set server: utf8mb4
           collation server: utf8mb4_general_ci
       - uses: actions/checkout@v3
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Run a one-line script
         run: echo Hello, world!
