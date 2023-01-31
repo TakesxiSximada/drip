@@ -1,0 +1,11 @@
+jobs:
+  foo:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: mysql
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: 5.7
+          mysql root password: testing
+          character set server: utf8mb4
+          collation server: utf8mb4_general_ci
