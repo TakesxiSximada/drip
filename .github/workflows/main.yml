@@ -20,7 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "MYSQL_CONTAINER_ID=$(docker ps --filter ancestor=mysql:5.7 --quiet)" >> $GITHUB_ENV
-      - run: docker exec ${MYSQL_CONTAINER_ID} bash -c 'echo "SELECT 1;" | mysql'
+      - run: docker exec ${MYSQL_CONTAINER_ID} bash -c 'mysqldump foo > dump.sql'
+      - run: echo "CREATE DATABASE foo_1 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;" | mysql -h 127.0.0.1 -u root
+      - run: docker exec ${MYSQL_CONTAINER_ID} bash -c 'mysql foo_1 < dump.sql'
+      - run: echo "show databases;" | mysql -h 127.0.0.1 -u root
+      - run: echo "show tables;" | mysql -h 127.0.0.1 -u root foo
+      - run: echo "show tables;" | mysql -h 127.0.0.1 -u root foo_1
+
       # - run: mysqldump -h 127.0.0.1 -u root foo > dump.sql
       # - run: echo "CREATE DATABASE foo_1 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;" | mysql -h 127.0.0.1 -u root
       # - run: mysql -h 127.0.0.1 -u root foo < dump.sql
