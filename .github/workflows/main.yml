@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-18.04
     services:
       mysql:
+        name: aaa
+        container_name: bbb
         image: mysql:5.7
         ports:
           - 3306:3306
