@@ -6,7 +6,7 @@ on:
 
 jobs:
   foo:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-18.04
     services:
       mysql:
         image: mysql:5.7
