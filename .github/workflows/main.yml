@@ -16,7 +16,7 @@ jobs:
           character set server: utf8mb4
           collation server: utf8mb4_general_ci
       - uses: actions/checkout@v3
-      - run: echo "SELECT 1" | mysql -u root
+      - run: echo "SELECT 1" | mysql -h 127.0.0.1 -u root
 
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
