@@ -6,7 +6,7 @@ on:
 
 jobs:
   foo:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     services:
       mysql:
         image: mysql:5.7
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "MYSQL_CONTAINER_ID=$(docker ps --filter ancestor=mysql:5.7 --quiet)" >> $GITHUB_ENV
-      - run: echo $MYSQL_CONTAINER_ID
+      - run: docker exec $MYSQL_CONTAINER_ID 'echo "SELECT 1;" | mysql -u root'
 
       # - run: mysqldump -h 127.0.0.1 -u root foo > dump.sql
       # - run: echo "CREATE DATABASE foo_1 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;" | mysql -h 127.0.0.1 -u root
