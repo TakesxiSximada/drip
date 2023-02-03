@@ -21,12 +21,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: docker ps
-      - run: mysqldump -h 127.0.0.1 -u root foo > dump.sql
-      - run: echo "CREATE DATABASE foo_1 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;" | mysql -h 127.0.0.1 -u root
-      - run: mysql -h 127.0.0.1 -u root foo < dump.sql
-      - run: echo "show databases;" | mysql -h 127.0.0.1 -u root
-      # - name: mysql
+      - run: echo "MYSQL_CONTAINER_ID=$(docker ps --filter ancestor=mysql:5.7 --quiet)" >> $GITHUB_ENV
+      - run: echo $MYSQL_CONTAINER_ID
+
+      # - run: mysqldump -h 127.0.0.1 -u root foo > dump.sql
+      # - run: echo "CREATE DATABASE foo_1 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;" | mysql -h 127.0.0.1 -u root
+      # - run: mysql -h 127.0.0.1 -u root foo < dump.sql
+      # - run: echo "show databases;" | mysql -h 127.0.0.1 -u root
+
+
+        # - name: mysql
       #   uses: mirromutth/mysql-action@v1.1
       #   with:
       #     mysql version: 5.7
